@@ -8,7 +8,7 @@ export function Header() {
           className={`${
             router === "/works"
               ? "text-blue-500 hover:text-blue-400"
-              : "text-stone-500 hover:text-stone-100"
+              : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
         >
           Works
