@@ -11,7 +11,7 @@ export function Home() {
           <p className="text-1xl md:text-2xl my-5 text-slate-300">
             I am a 3D interior designer, at the moment I have more than 100 works
           </p>
-          <div className="flex mb-10 gap-5">
+          <div className="flex mb-10 gap-5 h-9">
             <div className="flex gap-1 content-center items-center">
               <div className="flex">
                 <img src={Star} alt="User raiting" className="w-6 h-5" />
@@ -20,6 +20,7 @@ export function Home() {
                 <img src={Star} alt="User raiting" className="w-6 h-5" />
                 <img src={Star} alt="User raiting" className="w-6 h-5" />
               </div>
+              <p className="text-yellow-200 pt-1 font-bold">5.0</p>
             </div>
             <div className="flex ml-2">
               {usersReviewsPhotos.map((photoName) => {
@@ -27,7 +28,7 @@ export function Home() {
                   <img
                     src={photoName + ".svg"}
                     alt={photoName}
-                    className="w-8 h-8 bg-cover rounded-full -ml-2"
+                    className="w-8 h-8 bg-cover rounded-full -ml-2 hover:w-9 hover:h-9"
                   />
                 );
               })}
