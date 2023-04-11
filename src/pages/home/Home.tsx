@@ -33,7 +33,7 @@ export function Home() {
               {usersReviewsPhotos.map((photoName) => {
                 return (
                   <img
-                    src={photoName + ".svg"}
+                    src={photoName + ".png"}
                     alt={photoName}
                     className="w-8 h-8 bg-cover rounded-full -ml-2 hover:w-9 hover:h-9"
                   />
