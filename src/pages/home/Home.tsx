@@ -1,36 +1,10 @@
-import { useEffect, useState } from "react";
 import Star from "../../assets/star.svg";
-
-const usersReviewsPhotos = [
-  "person-4.svg",
-  "person-2.svg",
-  "person-3.svg",
-  "person-4.svg",
-  "person-2.svg",
-  "person-3.svg",
-];
-
-interface Image {
-  name: string;
-  src: string;
-}
+import Person1 from "/person-2.svg";
+import Person2 from "/person-3.svg";
+import Person3 from "/person-4.svg";
 
 export function Home() {
-  const loadImage = async (imageName: string): Promise<Image> => {
-    const image = await import(`./${imageName}`);
-    return { name: imageName, src: image.default };
-  };
-
-  const loadImages = async () => {
-    const images: Image[] = await Promise.all(usersReviewsPhotos.map(loadImage));
-    return images;
-  };
-
-  const [images, setImages] = useState<Image[]>([]);
-
-  useEffect(() => {
-    loadImages().then((loadedImages) => setImages(loadedImages));
-  }, []);
+  const images = [Person1, Person2, Person3, Person1, Person2, Person3];
 
   return (
     <div className="bg-[url('/home-background.jpg')] bg-cover h-screen">
@@ -52,9 +26,14 @@ export function Home() {
               <p className="text-yellow-200 pt-1 font-bold">5.0</p>
             </div>
             <div className="flex ml-2">
-              {images.map((image) => (
-                <img key={image.name} src={image.src} alt={image.name} />
-              ))}{" "}
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`person-${index + 1}`}
+                  className="w-8 h-8 bg-cover rounded-full -ml-2 hover:w-9 hover:h-9"
+                />
+              ))}
             </div>
           </div>
           <div className="flex gap-8 w-100 text-slate-300">
