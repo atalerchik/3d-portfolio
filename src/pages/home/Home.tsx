@@ -1,7 +1,7 @@
 import Star from "../../assets/star.svg";
-import Person1 from "../../person-2.svg";
-import Person2 from "../../person-3.svg";
-import Person3 from "../../person-4.svg";
+import Person1 from "../../assets/person-2.svg";
+import Person2 from "../../assets/person-3.svg";
+import Person3 from "../../assets/person-4.svg";
 
 export function Home() {
   const images = [Person1, Person2, Person3, Person1, Person2, Person3];
