@@ -1,10 +1,14 @@
 import Star from "../../assets/star.svg";
-import Person1 from "../../assets/person-1.png";
-import Person2 from "../../assets/person-2.png";
-import Person3 from "../../assets/person-3.png";
 
 export function Home() {
-  const images = [Person1, Person2, Person3, Person1, Person2, Person3];
+  const usersReviewsPhotos = [
+    "person-1",
+    "person-2",
+    "person-3",
+    "person-1",
+    "person-2",
+    "person-3",
+  ];
 
   return (
     <div className="bg-[url('/home-background.jpg')] bg-cover h-screen">
@@ -26,14 +30,15 @@ export function Home() {
               <p className="text-yellow-200 pt-1 font-bold">5.0</p>
             </div>
             <div className="flex ml-2">
-              {images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`person-${index + 1}`}
-                  className="w-8 h-8 bg-cover rounded-full -ml-2 hover:w-9 hover:h-9"
-                />
-              ))}
+              {usersReviewsPhotos.map((photoName) => {
+                return (
+                  <img
+                    src={photoName + ".svg"}
+                    alt={photoName}
+                    className="w-8 h-8 bg-cover rounded-full -ml-2 hover:w-9 hover:h-9"
+                  />
+                );
+              })}{" "}
             </div>
           </div>
           <div className="flex gap-8 w-100 text-slate-300">
