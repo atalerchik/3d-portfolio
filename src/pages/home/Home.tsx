@@ -1,8 +1,26 @@
 import Star from "../../assets/star.svg";
 
-const usersReviewsPhotos = ["person-4", "person-2", "person-3", "person-4", "person-2", "person-3"];
+const usersReviewsPhotos = [
+  "person-4.svg",
+  "person-2.svg",
+  "person-3.svg",
+  "person-4.svg",
+  "person-2.svg",
+  "person-3.svg",
+];
 
-export function Home() {
+interface Image {
+  name: string;
+  src: string;
+}
+
+export async function Home() {
+  const loadImage = async (imageName: string): Promise<Image> => {
+    const image = await import(`./${imageName}`);
+    return { name: imageName, src: image.default };
+  };
+
+  const images = await Promise.all(usersReviewsPhotos.map(loadImage));
   return (
     <div className="bg-[url('/home-background.jpg')] bg-cover h-screen">
       <div className=" flex items-center h-screen w-5/6 mx-auto">
@@ -23,15 +41,9 @@ export function Home() {
               <p className="text-yellow-200 pt-1 font-bold">5.0</p>
             </div>
             <div className="flex ml-2">
-              {usersReviewsPhotos.map((photoName) => {
-                return (
-                  <img
-                    src={photoName + ".jpg"}
-                    alt={photoName}
-                    className="w-8 h-8 bg-cover rounded-full -ml-2 hover:w-9 hover:h-9"
-                  />
-                );
-              })}
+              {images.map((image) => (
+                <img key={image.name} src={image.src} alt={image.name} />
+              ))}
             </div>
           </div>
           <div className="flex gap-8 w-100 text-slate-300">
