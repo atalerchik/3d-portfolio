@@ -119,3 +119,6 @@ web_modules/
 .pnp.*
 
 /config/local.json
+
+# Local Netlify folder
+.netlify
