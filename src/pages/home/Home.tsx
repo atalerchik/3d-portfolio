@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Star from "../../assets/star.svg";
 
 const usersReviewsPhotos = [
@@ -14,13 +15,23 @@ interface Image {
   src: string;
 }
 
-export async function Home() {
+export function Home() {
   const loadImage = async (imageName: string): Promise<Image> => {
     const image = await import(`./${imageName}`);
     return { name: imageName, src: image.default };
   };
 
-  const images = await Promise.all(usersReviewsPhotos.map(loadImage));
+  const loadImages = async () => {
+    const images: Image[] = await Promise.all(usersReviewsPhotos.map(loadImage));
+    return images;
+  };
+
+  const [images, setImages] = useState<Image[]>([]);
+
+  useEffect(() => {
+    loadImages().then((loadedImages) => setImages(loadedImages));
+  }, []);
+
   return (
     <div className="bg-[url('/home-background.jpg')] bg-cover h-screen">
       <div className=" flex items-center h-screen w-5/6 mx-auto">
@@ -43,7 +54,7 @@ export async function Home() {
             <div className="flex ml-2">
               {images.map((image) => (
                 <img key={image.name} src={image.src} alt={image.name} />
-              ))}
+              ))}{" "}
             </div>
           </div>
           <div className="flex gap-8 w-100 text-slate-300">
