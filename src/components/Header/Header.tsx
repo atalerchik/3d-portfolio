@@ -1,20 +1,36 @@
-export function Header() {
-  const router = window.location.pathname;
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
+export function Header() {
   return (
     <header className="flex flex-col-reverse gap-5 justify-between items-center md:flex-row py-3 w-5/6 my-0 mx-auto">
       <nav className="gap-10 flex text-stone-300 font-bold ">
-        <a
+        <Link
+          to={"/"}
           className={`${
-            router === "/works"
+            window.location.pathname === "/"
+              ? "text-blue-500 hover:text-blue-400"
+              : "text-stone-300 hover:text-stone-100"
+          } cursor-pointer`}
+        >
+          Home
+        </Link>
+        <Link
+          to={"/works"}
+          className={`${
+            window.location.path === "/works"
               ? "text-blue-500 hover:text-blue-400"
               : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
         >
           Works
-        </a>
-        <a className="hover:text-stone-100 cursor-pointer">Viewer</a>
-        <a className="hover:text-stone-100 cursor-pointer">About</a>
+        </Link>
+        <Link to={"/viewer"} className="hover:text-stone-100 cursor-pointer">
+          Viewer
+        </Link>
+        <Link to={"/about"} className="hover:text-stone-100 cursor-pointer">
+          About
+        </Link>
       </nav>
       <div className="flex gap-5">
         <svg
