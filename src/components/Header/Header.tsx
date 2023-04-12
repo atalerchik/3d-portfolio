@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRoutes } from "react-router-dom";
 
 export function Header() {
   return (
@@ -18,7 +18,7 @@ export function Header() {
         <Link
           to={"/works"}
           className={`${
-            window.location.path === "/works"
+            window.location.pathname === "/works"
               ? "text-blue-500 hover:text-blue-400"
               : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
