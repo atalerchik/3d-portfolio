@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function Header() {
-  const [pathname, setPathname] = useState<string>(window.location.pathname);
-
+  const location = useLocation();
   return (
     <header className="flex flex-col-reverse gap-5 justify-between items-center md:flex-row py-3 w-5/6 my-0 mx-auto">
       <nav className="gap-10 flex text-stone-300 font-bold ">
         <Link
           to={"/"}
-          onClick={() => setPathname("/")}
           className={`${
-            pathname === "/"
+            location.pathname === "/"
               ? "text-blue-500 hover:text-blue-400"
               : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
@@ -20,9 +17,8 @@ export function Header() {
         </Link>
         <Link
           to={"/works"}
-          onClick={() => setPathname("/works")}
           className={`${
-            pathname === "/works"
+            location.pathname === "/works"
               ? "text-blue-500 hover:text-blue-400"
               : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
@@ -31,9 +27,8 @@ export function Header() {
         </Link>
         <Link
           to={"/viewer"}
-          onClick={() => setPathname("/viewer")}
           className={`${
-            pathname === "/viewer"
+            location.pathname === "/viewer"
               ? "text-blue-500 hover:text-blue-400"
               : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
@@ -42,9 +37,8 @@ export function Header() {
         </Link>
         <Link
           to={"/about"}
-          onClick={() => setPathname("/about")}
           className={`${
-            pathname === "/about"
+            location.pathname === "/about"
               ? "text-blue-500 hover:text-blue-400"
               : "text-stone-300 hover:text-stone-100"
           } cursor-pointer`}
