@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Star from "../../assets/star.svg";
 
 export function Home() {
@@ -42,12 +43,18 @@ export function Home() {
             </div>
           </div>
           <div className="flex gap-8 w-100 text-slate-300">
-            <button className="rounded-full border-stone-300 border-2 py-4 flex-1 hover:bg-blue-100 hover:text-slate-900">
+            <Link
+              to={"/works"}
+              className="rounded-full text-center border-stone-300 border-2 py-4 flex-1 hover:bg-blue-100 hover:text-slate-900"
+            >
               VIEW MY WORKS
-            </button>
-            <button className="rounded-full border-stone-300 border-2 py-4 flex-1 hover:bg-blue-100 hover:text-slate-900">
+            </Link>
+            <Link
+              to={"/about"}
+              className="rounded-full text-center border-stone-300 border-2 py-4 flex-1 hover:bg-blue-100 hover:text-slate-900"
+            >
               ABOUT ME
-            </button>
+            </Link>
           </div>
         </div>
       </div>
