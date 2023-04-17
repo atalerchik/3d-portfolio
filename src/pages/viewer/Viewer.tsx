@@ -19,7 +19,7 @@ export const ThreeScene: React.FC = () => {
         0.1,
         1000,
       );
-      camera.position.set(0, 0, 5);
+      camera.position.set(1, 2, 5);
 
       // Create a new Three.js renderer
       const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -27,13 +27,8 @@ export const ThreeScene: React.FC = () => {
       // Set the renderer size to the size of the container element
       renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
 
-      // Add the renderer to the container element
-      if (mountRef.current) {
-        mountRef.current.appendChild(renderer.domElement);
-      }
-
       // Create a new Three.js ambient light
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      const ambientLight = new THREE.AmbientLight(0xf55fff, 0.5);
       scene.add(ambientLight);
 
       // Create a new Three.js directional light
@@ -41,6 +36,10 @@ export const ThreeScene: React.FC = () => {
       directionalLight.position.set(1, 1, 0);
       scene.add(directionalLight);
 
+      // Add the renderer to the container element
+      if (mountRef.current) {
+        mountRef.current.appendChild(renderer.domElement);
+      }
       // Load the glb file using the GLTFLoader
       const loader = new GLTFLoader();
       loader.load(
@@ -48,6 +47,12 @@ export const ThreeScene: React.FC = () => {
         (gltf) => {
           // Add the gltf model to the scene
           scene.add(gltf.scene);
+
+          // Use the lights that are part of the model
+          const modelLights = gltf.scene.children.filter((child) => child instanceof THREE.Light);
+          modelLights.forEach((light) => {
+            scene.add(light);
+          });
         },
         (xhr) => {
           // Log the progress of the load
@@ -90,7 +95,7 @@ export const ThreeScene: React.FC = () => {
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.dampingFactor = 0.1;
-      controls.rotateSpeed = 1;
+      controls.rotateSpeed = 0.5;
       // Set the controlsRef to the controls object
       controlsRef.current = controls;
 
@@ -107,6 +112,8 @@ export const ThreeScene: React.FC = () => {
     if (controlsRef.current) {
       event.preventDefault();
       controlsRef.current.zoomO += event.deltaY * 0.01;
+      controlsRef.current.minDistance = 1;
+      controlsRef.current.maxDistance = 10;
       controlsRef.current.update();
     }
   };
