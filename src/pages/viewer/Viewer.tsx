@@ -43,7 +43,7 @@ export const ThreeScene: React.FC = () => {
       // Load the glb file using the GLTFLoader
       const loader = new GLTFLoader();
       loader.load(
-        "model.glb",
+        "model.gltf",
         (gltf) => {
           // Add the gltf model to the scene
           scene.add(gltf.scene);
