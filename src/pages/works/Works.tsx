@@ -1,81 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchBar, WorkDetails } from "../../components";
 import { Gallery } from "../../components/Gallery/Gallery";
 
 const Works: React.FC = () => {
-  const works = [
-    {
-      id: 1,
-      name: "Work 1",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 10,
-      date: new Date(),
-    },
-    {
-      id: 2,
-      name: "Work 2",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 20,
-      date: new Date(),
-    },
-    {
-      id: 3,
-      name: "Work 3",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 30,
-      date: new Date(),
-    },
-    {
-      id: 4,
-      name: "Work 4",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 40,
-      date: new Date(),
-    },
-    {
-      id: 5,
-      name: "Work 5",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 50,
-      date: new Date(),
-    },
-    {
-      id: 6,
-      name: "Work 6",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 60,
-      date: new Date(),
-    },
-    {
-      id: 7,
-      name: "Work 7",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 70,
-      date: new Date(),
-    },
-    {
-      id: 8,
-      name: "Work 8",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 80,
-      date: new Date(),
-    },
-    {
-      id: 9,
-      name: "Work 9",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 90,
-      date: new Date(),
-    },
-    {
-      id: 10,
-      name: "Work 10",
-      imageUrl: "https://via.placeholder.com/150",
-      views: 100,
-      date: new Date(),
-    },
-  ];
+  const [works, setWorks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    fetch(`${backendUrl}/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setWorks(data);
+        setLoading(false);
+      });
+  }, []);
 
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query);
@@ -85,7 +25,23 @@ const Works: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-blue-400 mb-4">3D Designer Works Gallery</h1>
       <SearchBar onSearchQueryChange={handleSearchQueryChange} />
-      <Gallery works={works} searchQuery={searchQuery} />
+      {loading ? (
+        <div className="animate-pulse flex space-x-4">
+          <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+          <div className="flex-1 space-y-6 py-1">
+            <div className="h-2 bg-slate-700 rounded"></div>
+            <div className="space-y-3">
+              <div className="grid grid-cols-3 gap-4">
+                <div className="h-2 bg-slate-700 rounded col-span-2"></div>
+                <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+              </div>
+              <div className="h-2 bg-slate-700 rounded"></div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Gallery works={works} searchQuery={searchQuery} />
+      )}
     </div>
   );
 };

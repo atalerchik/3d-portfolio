@@ -16,7 +16,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearchQueryChange }) => 
         type="text"
         name="search"
         id="search"
-        className="border text-slate-900 rounded py-2 px-4 mr-2"
+        className="border text-white-900 rounded-full py-2 px-4 mr-2 bg-neutral-700 border-neutral-600 hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-600"
+        placeholder="Small Kitchen"
         onChange={handleInputChange}
       />
     </div>
