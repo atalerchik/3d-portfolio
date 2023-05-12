@@ -26,16 +26,6 @@ export function Header() {
           Works
         </Link>
         <Link
-          to={"/viewer"}
-          className={`${
-            location.pathname === "/viewer"
-              ? "text-blue-500 hover:text-blue-400"
-              : "text-stone-300 hover:text-stone-100"
-          } cursor-pointer`}
-        >
-          Viewer
-        </Link>
-        <Link
           to={"/about"}
           className={`${
             location.pathname === "/about"

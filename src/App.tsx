@@ -4,6 +4,7 @@ import { Header } from "./components";
 import AboutMe from "./pages/aboutMe/AboutMe";
 import { Home } from "./pages/home/Home";
 import { ThreeScene } from "./pages/viewer/Viewer";
+import { Work } from "./pages/work/Work";
 import Works from "./pages/works/Works";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/works" element={<Works />} />
         <Route path="/about" element={<AboutMe />} />
-        <Route path="/viewer" element={<ThreeScene />} />
+        <Route path="/viewer/:id" element={<ThreeScene />} />
+        <Route path="/work/:id" element={<Work />} />
       </Routes>
     </div>
   );

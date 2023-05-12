@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { useParams } from "react-router-dom";
 
 export const ThreeScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<OrbitControls>();
+  const { id } = useParams();
 
   useEffect(() => {
     if (mountRef.current) {
@@ -40,29 +42,12 @@ export const ThreeScene: React.FC = () => {
       if (mountRef.current) {
         mountRef.current.appendChild(renderer.domElement);
       }
-      // Load the glb file using the GLTFLoader
-      const loader = new GLTFLoader();
-      loader.load(
-        "model.gltf",
-        (gltf) => {
-          // Add the gltf model to the scene
-          scene.add(gltf.scene);
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-          // Use the lights that are part of the model
-          const modelLights = gltf.scene.children.filter((child) => child instanceof THREE.Light);
-          modelLights.forEach((light) => {
-            scene.add(light);
-          });
-        },
-        (xhr) => {
-          // Log the progress of the load
-          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-        },
-        (error) => {
-          // Log any errors that occur during the load
-          console.error("Error loading glb file", error);
-        },
-      );
+      const loader = new GLTFLoader();
+      loader.load(`${backendUrl}/${id}/object`, (gltf) => {
+        scene.add(gltf.scene);
+      });
 
       // Create an animation loop using requestAnimationFrame
       const animate = () => {

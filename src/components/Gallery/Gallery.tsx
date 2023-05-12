@@ -14,7 +14,7 @@ export const Gallery: React.FC<GalleryProps> = ({ works, searchQuery }) => {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {filteredWorks.map((work) => (
-        <Link key={work.id} to={`/works/${work.id}`}>
+        <Link key={work.id} to={`/work/${work.id}`}>
           <WorkDetails key={work.id} work={work} />
         </Link>
       ))}
