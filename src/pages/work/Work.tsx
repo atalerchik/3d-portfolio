@@ -41,18 +41,22 @@ export function Work() {
         </div>
       ) : (
         <div className="flex sm:flex-row flex-col space-y-8 p-8 gap-8 bg-neutral-800 rounded-md">
-          <img src={work.image} alt={work.name} className="w-1/2 rounded-lg" />
-          <div className="mt-4 flex flex-col space-y-4 w-full">
+          <img
+            src={work.image}
+            alt={work.name}
+            className="w-full sm:w-1/2 rounded-lg flex-1 object-cover h-fit"
+          />
+          <div className="mt-4 flex flex-col space-y-4 w-full flex-1">
             <div className="flex flex-row gap-4 items-center justify-between w-full">
-              <h2 className="text-2xl font-bold">{work.name}</h2>
+              <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
               <Link
                 to={`/viewer/${id}`}
-                className="text-blue-400 hover:underline cursor-pointer font-semibold text-sm sm:text-base "
+                className="text-blue-400 hover:underline cursor-pointer font-semibold text-base sm:text-lg "
               >
                 View
               </Link>
             </div>
-            <p>{work.description}</p>
+            <p className="text-lg sm:text-xl">{work.description}</p>
           </div>
         </div>
       )}

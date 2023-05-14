@@ -3,7 +3,7 @@ const AboutMe: React.FC = () => {
     <div className="flex flex-col justify-center items-center">
       <img src="./person-2.jpg" alt="Profile" className="w-48 h-48 rounded-full mb-8" />
       <h1 className="text-3xl font-bold mb-4">Alexey Leonov | 3D Designer</h1>
-      <p className="text-lg text-gray-500 mb-8 w-6/12 text-justify">
+      <p className="text-lg text-gray-500 mb-8 w-full px-4 sm:w-[600px] text-justify">
         Hi there! My name is Alexey, and I am a 3D designer based in{" "}
         <span className="text-gray-400 hover:text-blue-600 transition-colors duration-300">
           Grodno
