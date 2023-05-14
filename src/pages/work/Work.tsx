@@ -20,7 +20,13 @@ export function Work() {
         setWork(data);
         setLoading(false);
       });
-  }, []);
+    fetch(`${backendUrl}/${id}/views`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }, [id]);
 
   return (
     <div className="w-3/4 mx-auto">
