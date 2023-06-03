@@ -14,9 +14,11 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "postcss": "^8.4.21",
     "react": "^18.2.0",
+    "react-auth-kit": "^2.12.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.4",
     "stylelint-lsp": "^1.2.4",
