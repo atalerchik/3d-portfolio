@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 interface LoginFormProps {
-  handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => Promise<void>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   setLogin: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -8,7 +10,7 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
   return (
     <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-neutral-900 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit} method="POST">
           <label htmlFor="email" className="block text-sm font-medium text-gray-300">
             Email address
           </label>
@@ -47,7 +49,10 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
                 type="checkbox"
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-300 cursor-pointer"
+              >
                 Remember me
               </label>
             </div>
@@ -55,10 +60,18 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
           <div>
             <button
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600"
-              onClick={handleSubmit}
+              type="submit"
             >
               Sign in
             </button>
+          </div>
+          <div>
+            <Link
+              to="/signup"
+              className="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white "
+            >
+              Sign up
+            </Link>
           </div>
         </form>
       </div>
