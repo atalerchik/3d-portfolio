@@ -14,13 +14,13 @@ export function Work() {
   const { id } = useParams();
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    fetch(`${backendUrl}/${id}`)
+    fetch(`${backendUrl}/3d-data/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setWork(data);
         setLoading(false);
       });
-    fetch(`${backendUrl}/${id}/views`, {
+    fetch(`${backendUrl}/3d-data/${id}/views`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

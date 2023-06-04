@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuthUser } from "react-auth-kit";
 import { SearchBar, WorkDetails } from "../../components";
 import { Gallery } from "../../components/Gallery/Gallery";
 
@@ -6,15 +7,17 @@ const Works: React.FC = () => {
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const auth = useAuthUser();
 
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    fetch(`${backendUrl}/`)
+    fetch(`${backendUrl}/3d-data`)
       .then((res) => res.json())
       .then((data) => {
         setWorks(data);
         setLoading(false);
       });
+    alert(auth()?.id);
   }, []);
 
   const handleSearchQueryChange = (query: string) => {

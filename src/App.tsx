@@ -8,6 +8,7 @@ import { Work } from "./pages/work/Work";
 import Works from "./pages/works/Works";
 import { AuthProvider } from "react-auth-kit";
 import { Login } from "./pages/login/Login";
+import { SignUp } from "./pages/signup/SignUp";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/viewer/:id" element={<ThreeScene />} />
           <Route path="/work/:id" element={<Work />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
         </Routes>
       </AuthProvider>
     </div>
