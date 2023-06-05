@@ -16,7 +16,7 @@ export const ThreeScene: React.FC = () => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     const loader = new GLTFLoader();
-    loader.load(`${backendUrl}/${id}/object`, (gltf) => {
+    loader.load(`${backendUrl}/3d-data/${id}/object`, (gltf) => {
       scene.add(gltf.scene);
     });
 

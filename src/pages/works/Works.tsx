@@ -1,23 +1,31 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAuthUser } from "react-auth-kit";
-import { SearchBar, WorkDetails } from "../../components";
+import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
+import { SearchBar } from "../../components";
 import { Gallery } from "../../components/Gallery/Gallery";
 
 const Works: React.FC = () => {
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const isAuthenticated = useIsAuthenticated();
   const auth = useAuthUser();
+
 
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    fetch(`${backendUrl}/3d-data`)
-      .then((res) => res.json())
-      .then((data) => {
-        setWorks(data);
-        setLoading(false);
+    const params = isAuthenticated() ? { userId: auth()?.id } : {};
+
+    const fetchWorks = async () => {
+      const response = await axios.get(`${backendUrl}/3d-data/`, {
+        params 
       });
-    alert(auth()?.id);
+      const data = await response.data;
+      setWorks(data);
+      setLoading(false);
+    };
+
+    fetchWorks();
   }, []);
 
   const handleSearchQueryChange = (query: string) => {
