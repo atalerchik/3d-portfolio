@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
+import type { AxiosError } from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignUpForm } from "../../components/SignUpForm/SignUpForm";
@@ -9,15 +10,22 @@ export function SignUp() {
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const response = await axios.post(`${backendUrl}/user/registration`, {
-      email: login,
-      password,
-    });
+    try {
+      e.preventDefault();
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      const response = await axios.post(`${backendUrl}/user/registration`, {
+        email: login,
+        password,
+      });
 
-    if (response.status === 200) {
-      navigate("/login");
+      if (response.status === 200) {
+        alert("Вы успешно зарегистрированы");
+        navigate("/login");
+      }
+    } catch (error: AxiosError | any) {
+      if (isAxiosError(error)) {
+        alert(error.response?.statusText);
+      }
     }
   }
 
