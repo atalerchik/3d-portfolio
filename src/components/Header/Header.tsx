@@ -83,14 +83,14 @@ export function Header() {
             className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded"
             onClick={() => signOut()}
           >
-            <img src="exit.png" height="18px" width="18px" alt="logo" />
+            <img src="./exit.png" height="18px" width="18px" alt="logo" />
           </button>
         ) : (
           <Link
             to="/login"
             className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded"
           >
-            <img src="login.png" height="18px" width="18px" alt="logo" />
+            <img src="./login.png" height="18px" width="18px" alt="logo" />
           </Link>
         )}
       </div>
