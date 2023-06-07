@@ -12,8 +12,8 @@ export function Home() {
   ];
 
   return (
-    <div className="bg-[url('/home-background.jpg')] bg-cover h-screen">
-      <div className=" flex items-center h-screen w-5/6 mx-auto">
+    <div className="flex h-[calc(100vh-102px)] items-center justify-center  md:h-[calc(100vh-58px)] bg-[url('/home-background.jpg')] be-cover bg-center bg-no-reapeat">
+      <div className=" flex items-center mx-auto  w-5/6 mx-auto">
         <div className="">
           <h1 className="text-6xl md:text-8xl font-bold block"> Hi, I'm Alexey. </h1>
           <p className="text-1xl md:text-2xl my-5 text-slate-300">
@@ -45,13 +45,13 @@ export function Home() {
           <div className="flex gap-8 w-100 text-slate-300">
             <Link
               to={"/works"}
-              className="rounded-full text-center border-stone-300 border-2 py-4 flex-1 hover:bg-blue-100 hover:text-slate-900"
+              className="rounded-full text-center border-stone-300 border-2 py-4 flex-1 hover:bg-blue-500 bg-stone-900 bg-opacity-50 transition-color duration-200 ease-in"
             >
               VIEW MY WORKS
             </Link>
             <Link
               to={"/about"}
-              className="rounded-full text-center border-stone-300 border-2 py-4 flex-1 hover:bg-blue-100 hover:text-slate-900"
+              className="rounded-full text-center border-stone-300 border-2 py-4 flex-1 hover:bg-blue-500 bg-stone-900 bg-opacity-50 transition-color duration-200 ease-in"
             >
               ABOUT ME
             </Link>
