@@ -47,7 +47,7 @@ export function Work() {
         </div>
       ) : (
         <div className="flex flex-wrap space-y-8 p-8 gap-8 bg-neutral-800 rounded-md mb-12">
-          <img src={work.image} alt={work.name} className="w-full rounded-lg object-cover" />
+          <img src={work.image} alt={work.name} className="w-full max-h-[600px] aspect-video rounded-lg object-cover" />
           <div className="mt-4 flex flex-col space-y-4 w-full">
             <div className="flex flex-row gap-4 items-center justify-between w-full">
               <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>

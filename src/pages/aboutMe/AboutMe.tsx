@@ -1,7 +1,11 @@
 const AboutMe: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <img src="./person-2.jpg" alt="Profile" className="w-48 h-48 rounded-full mb-8" />
+      <img
+        src="./my-photo.webp"
+        alt="Profile"
+        className="aspect-square h-48 rounded-full mb-8 object-cover"
+      />
       <h1 className="text-3xl font-bold mb-4">Alexey Leonov | 3D Designer</h1>
       <p className="text-lg text-gray-500 mb-8 w-full px-4 sm:w-[600px] text-justify">
         Hi there! My name is Alexey, and I am a 3D designer based in{" "}
@@ -27,7 +31,7 @@ const AboutMe: React.FC = () => {
       </div>
       <div className="flex flex-row">
         <a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/in/alexey-leonov-26b39627a/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
@@ -36,7 +40,7 @@ const AboutMe: React.FC = () => {
         </a>
         <span className="mx-4">|</span>
         <a
-          href="https://dribbble.com"
+          href="https://dribbble.com/Slasher888?onboarding=true"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-600 hover:text-pink-600 transition-colors duration-300"
@@ -45,7 +49,7 @@ const AboutMe: React.FC = () => {
         </a>
         <span className="mx-4">|</span>
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/slayer.of99/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-600 hover:text-purple-600 transition-colors duration-300"
