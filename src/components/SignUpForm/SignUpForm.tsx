@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface SignUpFormProps {
@@ -7,12 +8,13 @@ interface SignUpFormProps {
 }
 
 export function SignUpForm({ handleSubmit, setLogin, setPassword }: SignUpFormProps) {
+  const [t, i18n] = useTranslation();
   return (
     <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-neutral-900 py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit} method="POST">
           <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-            Email address
+            {t("auth.email")}
           </label>
           <div className="mt-1">
             <input
@@ -27,7 +29,7 @@ export function SignUpForm({ handleSubmit, setLogin, setPassword }: SignUpFormPr
             />
           </div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-            Password
+            {t("auth.password")}
           </label>
           <div className="mt-1">
             <input
@@ -46,7 +48,7 @@ export function SignUpForm({ handleSubmit, setLogin, setPassword }: SignUpFormPr
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600"
               type="submit"
             >
-              Sign up
+              {t("auth.signUp")}
             </button>
           </div>
           <div>
@@ -54,7 +56,7 @@ export function SignUpForm({ handleSubmit, setLogin, setPassword }: SignUpFormPr
               to="/login"
               className="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white "
             >
-              Log in
+              {t("auth.signIn")}
             </Link>
           </div>
         </form>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface LoginFormProps {
@@ -7,12 +8,13 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProps) {
+  const [t, i18n] = useTranslation();
   return (
     <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-neutral-900 py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit} method="POST">
           <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-            Email address
+            {t("auth.email")}
           </label>
           <div className="mt-1">
             <input
@@ -27,7 +29,7 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
             />
           </div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-            Password
+            {t("auth.password")}
           </label>
           <div className="mt-1">
             <input
@@ -53,7 +55,7 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
                 htmlFor="remember-me"
                 className="ml-2 block text-sm text-gray-300 cursor-pointer"
               >
-                Remember me
+                {t("auth.rememberMe")}
               </label>
             </div>
           </div>
@@ -62,7 +64,7 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600"
               type="submit"
             >
-              Sign in
+              {t("auth.signIn")}
             </button>
           </div>
           <div>
@@ -70,7 +72,7 @@ export function LoginForm({ handleSubmit, setLogin, setPassword }: LoginFormProp
               to="/register"
               className="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white "
             >
-              Sign up
+              {t("auth.signUp")}
             </Link>
           </div>
         </form>
