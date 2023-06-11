@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
+import { useTranslation } from "react-i18next";
 import { SearchBar } from "../../components";
 import { Gallery } from "../../components/Gallery/Gallery";
 
@@ -8,9 +9,9 @@ const Works: React.FC = () => {
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [t, i18n] = useTranslation();
   const isAuthenticated = useIsAuthenticated();
   const auth = useAuthUser();
-
 
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -18,7 +19,7 @@ const Works: React.FC = () => {
 
     const fetchWorks = async () => {
       const response = await axios.get(`${backendUrl}/3d-data/`, {
-        params 
+        params,
       });
       const data = await response.data;
       setWorks(data);
@@ -34,7 +35,7 @@ const Works: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-blue-400 mb-4">3D Designer Works Gallery</h1>
+      <h1 className="text-4xl font-bold text-blue-400 mb-4">{t("works.title")}</h1>
       <SearchBar onSearchQueryChange={handleSearchQueryChange} />
       {loading ? (
         <div className="animate-pulse flex space-x-4">

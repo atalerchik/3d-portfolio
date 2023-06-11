@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
 const defaultWork = {
@@ -9,6 +10,7 @@ const defaultWork = {
 };
 
 export function Work() {
+  const [t, i18n] = useTranslation();
   const [work, setWork] = useState(defaultWork);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -47,7 +49,11 @@ export function Work() {
         </div>
       ) : (
         <div className="flex flex-wrap space-y-8 p-8 gap-8 bg-neutral-800 rounded-md mb-12">
-          <img src={work.image} alt={work.name} className="w-full max-h-[600px] aspect-video rounded-lg object-cover" />
+          <img
+            src={work.image}
+            alt={work.name}
+            className="w-full max-h-[600px] aspect-video rounded-lg object-cover"
+          />
           <div className="mt-4 flex flex-col space-y-4 w-full">
             <div className="flex flex-row gap-4 items-center justify-between w-full">
               <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
@@ -55,7 +61,7 @@ export function Work() {
                 to={`/viewer/${id}`}
                 className="text-blue-400 hover:underline cursor-pointer font-semibold text-base sm:text-lg "
               >
-                View
+                {t("work.view")}
               </Link>
             </div>
             <p className="text-lg sm:text-xl">{work.description}</p>
