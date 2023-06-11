@@ -122,3 +122,7 @@ web_modules/
 
 # Local Netlify folder
 .netlify
+
+# pnpm cache
+.pnpm-store
+.pnpm-lock.json
