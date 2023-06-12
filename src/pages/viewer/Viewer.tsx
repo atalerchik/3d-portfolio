@@ -15,7 +15,7 @@ export const ThreeScene: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${backendUrl}/models/${id}/object`);
+        const response = await axios.get(`${backendUrl}/${id}/object`);
         return response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
