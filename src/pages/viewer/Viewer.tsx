@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export const ThreeScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -10,19 +11,36 @@ export const ThreeScene: React.FC = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // Create a new Three.js scene
-    const scene = new THREE.Scene();
-
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-    const loader = new GLTFLoader();
-    loader.load(`${backendUrl}/3d-data/${id}/object`, (gltf) => {
-      scene.add(gltf.scene);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${backendUrl}/models/${id}/object`);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error;
+      }
+    };
+
+    const loadModel = async () => {
+      try {
+        const data = await fetchData();
+        const loader = new GLTFLoader();
+        const gltf = await loader.parseAsync(data, "");
+        scene.add(gltf.scene);
+      } catch (error) {
+        console.error("Error loading model:", error);
+      }
+    };
+
+    // Create a new Three.js scene
+    const scene = new THREE.Scene();
 
     if (!mountRef.current) {
       return;
     }
+
     // Create a new Three.js camera
     const camera = new THREE.PerspectiveCamera(
       90,
@@ -48,17 +66,19 @@ export const ThreeScene: React.FC = () => {
     scene.add(directionalLight);
 
     // Add the renderer to the container element
-    if (mountRef.current) {
-      mountRef.current.appendChild(renderer.domElement);
-    }
+    mountRef.current.appendChild(renderer.domElement);
+
+    // Load the model
+    loadModel();
 
     // Create an animation loop using requestAnimationFrame
     const animate = () => {
       requestAnimationFrame(animate);
 
       // Rotate the model
-      if (scene.children.length > 1 && scene.children[1] instanceof THREE.Mesh) {
-        scene.children[1].rotation.y += 0.01;
+      const mesh = scene.getObjectByName("gltfModel");
+      if (mesh) {
+        mesh.rotation.y += 0.01;
       }
 
       // Render the scene
@@ -84,7 +104,6 @@ export const ThreeScene: React.FC = () => {
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
     controls.rotateSpeed = 0.5;
-    // Set the controlsRef to the controls object
     controlsRef.current = controls;
 
     // Clean up function to remove event listeners and controls
@@ -92,7 +111,7 @@ export const ThreeScene: React.FC = () => {
       window.removeEventListener("resize", handleWindowResize);
       controlsRef.current?.dispose();
     };
-  }, []);
+  }, [id]);
 
   // Function to handle zooming with the mouse wheel
   const handleMouseWheel: React.WheelEventHandler<HTMLDivElement> = (event) => {
@@ -105,5 +124,9 @@ export const ThreeScene: React.FC = () => {
     }
   };
 
-  return <div ref={mountRef} onWheel={handleMouseWheel} className="h-screen"></div>;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <div ref={mountRef} onWheel={handleMouseWheel} className="h-screen"></div>
+    </Suspense>
+  );
 };
