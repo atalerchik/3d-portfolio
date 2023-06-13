@@ -29,12 +29,12 @@ export const ThreeScene: React.FC = () => {
         const loader = new GLTFLoader();
         const gltf = await loader.parseAsync(data, "");
 
-        // Ensure each material is using the correct encoding
-        gltf.scene.traverse((node) => {
-          if (node.isMesh && node.material.map) {
-            node.material.map.encoding = THREE.sRGBEncoding;
-          }
-        });
+        // // Ensure each material is using the correct encoding
+        // gltf.scene.traverse((node) => {
+        //   if (node.isMesh && node.material.map) {
+        //     node.material.map.encoding = THREE.sRGBEncoding;
+        //   }
+        // });
 
         scene.add(gltf.scene);
       } catch (error) {
