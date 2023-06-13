@@ -57,11 +57,11 @@ export const ThreeScene: React.FC = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
 
     // Create a new Three.js ambient light
-    const ambientLight = new THREE.AmbientLight(0xf55fff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xf55fff, 2.5);
     scene.add(ambientLight);
 
     // Create a new Three.js directional light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
     directionalLight.position.set(1, 1, 0);
     scene.add(directionalLight);
 
