@@ -28,20 +28,26 @@ export const ThreeScene: React.FC = () => {
         const data = await fetchData();
         const loader = new GLTFLoader();
         const gltf = await loader.parseAsync(data, "");
+
+        // Ensure each material is using the correct encoding
+        gltf.scene.traverse((node) => {
+          if (node.isMesh && node.material.map) {
+            node.material.map.encoding = THREE.sRGBEncoding;
+          }
+        });
+
         scene.add(gltf.scene);
       } catch (error) {
         console.error("Error loading model:", error);
       }
     };
 
-    // Create a new Three.js scene
     const scene = new THREE.Scene();
 
     if (!mountRef.current) {
       return;
     }
 
-    // Create a new Three.js camera
     const camera = new THREE.PerspectiveCamera(
       90,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
@@ -50,45 +56,35 @@ export const ThreeScene: React.FC = () => {
     );
     camera.position.set(1, 2, 5);
 
-    // Create a new Three.js renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-    // Set the renderer size to the size of the container element
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
 
-    // Create a new Three.js ambient light
     const ambientLight = new THREE.AmbientLight(0xf55fff, 2.5);
+    renderer.outputEncoding = THREE.sRGBEncoding;
     scene.add(ambientLight);
 
-    // Create a new Three.js directional light
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
     directionalLight.position.set(1, 1, 0);
     scene.add(directionalLight);
 
-    // Add the renderer to the container element
     mountRef.current.appendChild(renderer.domElement);
 
-    // Load the model
     loadModel();
 
-    // Create an animation loop using requestAnimationFrame
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Rotate the model
       const mesh = scene.getObjectByName("gltfModel");
       if (mesh) {
         mesh.rotation.y += 0.01;
       }
 
-      // Render the scene
       renderer.render(scene, camera);
     };
 
-    // Start the animation loop
     animate();
 
-    // Resize the renderer when the window is resized
     const handleWindowResize = () => {
       if (mountRef.current) {
         camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
@@ -99,21 +95,18 @@ export const ThreeScene: React.FC = () => {
 
     window.addEventListener("resize", handleWindowResize);
 
-    // Add the orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
     controls.rotateSpeed = 0.5;
     controlsRef.current = controls;
 
-    // Clean up function to remove event listeners and controls
     return () => {
       window.removeEventListener("resize", handleWindowResize);
       controlsRef.current?.dispose();
     };
   }, [id]);
 
-  // Function to handle zooming with the mouse wheel
   const handleMouseWheel: React.WheelEventHandler<HTMLDivElement> = (event) => {
     if (controlsRef.current) {
       event.preventDefault();
