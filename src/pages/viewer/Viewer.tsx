@@ -1,14 +1,17 @@
-import React, { Suspense, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export const ThreeScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<OrbitControls>();
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [t, i18n] = useTranslation();
 
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -25,18 +28,13 @@ export const ThreeScene: React.FC = () => {
 
     const loadModel = async () => {
       try {
+        setIsLoading(true);
         const data = await fetchData();
         const loader = new GLTFLoader();
         const gltf = await loader.parseAsync(data, "");
 
-        // // Ensure each material is using the correct encoding
-        // gltf.scene.traverse((node) => {
-        //   if (node.isMesh && node.material.map) {
-        //     node.material.map.encoding = THREE.sRGBEncoding;
-        //   }
-        // });
-
         scene.add(gltf.scene);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error loading model:", error);
       }
@@ -118,8 +116,8 @@ export const ThreeScene: React.FC = () => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div ref={mountRef} onWheel={handleMouseWheel} className="h-screen"></div>
-    </Suspense>
+    <div ref={mountRef} onWheel={handleMouseWheel} className="h-screen">
+      {isLoading && <div className="loading absolute top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black opacity-50">{t("loading")}</div>}
+    </div>
   );
 };
