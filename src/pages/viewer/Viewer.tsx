@@ -60,7 +60,7 @@ export const ThreeScene: React.FC = () => {
 
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
 
-    const ambientLight = new THREE.AmbientLight(0xf55fff, 2.5);
+    const ambientLight = new THREE.AmbientLight(0xf55fff, 1.5);
     renderer.outputEncoding = THREE.sRGBEncoding;
     scene.add(ambientLight);
 
