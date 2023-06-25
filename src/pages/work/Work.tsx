@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
+import { Comments } from "../../components";
 
 const defaultWork = {
+  id: "",
   name: "",
   description: "",
   image: "",
   views: 0,
+  comments: [
+    {
+      id: "",
+      name: "",
+      comment: "",
+      date: "",
+    },
+  ],
 };
 
 export function Work() {
@@ -29,6 +39,36 @@ export function Work() {
       },
     });
   }, [id]);
+  const comments = [
+    {
+      id: "1",
+      name: "John Doe",
+      comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
+      date: "2022-01-01",
+    },
+    {
+      id: "1",
+      name: "John Doe",
+      comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
+      date: "2022-01-01",
+    },
+    {
+      id: "1",
+      name: "John Doe",
+      comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
+      date: "2022-01-01",
+    },
+    {
+      id: "1",
+      name: "John Doe",
+      comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
+      date: "2022-01-01",
+    },
+  ];
 
   return (
     <div className="w-3/4 mx-auto">
@@ -48,25 +88,28 @@ export function Work() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-wrap space-y-8 p-8 gap-8 bg-neutral-800 rounded-md mb-12">
-          <img
-            src={work.image}
-            alt={work.name}
-            className="w-full max-h-[600px] aspect-video rounded-lg object-cover"
-          />
-          <div className="mt-4 flex flex-col space-y-4 w-full">
-            <div className="flex flex-row gap-4 items-center justify-between w-full">
-              <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
-              <Link
-                to={`/viewer/${id}`}
-                className="text-blue-400 hover:underline cursor-pointer font-semibold text-base sm:text-lg "
-              >
-                {t("work.view")}
-              </Link>
+        <>
+          <div className="flex flex-wrap space-y-8 p-8 gap-8 bg-neutral-800 rounded-md mb-12">
+            <img
+              src={work.image}
+              alt={work.name}
+              className="w-full max-h-[600px] aspect-video rounded-lg object-cover"
+            />
+            <div className="mt-4 flex flex-col space-y-4 w-full">
+              <div className="flex flex-row gap-4 items-center justify-between w-full">
+                <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
+                <Link
+                  to={`/viewer/${id}`}
+                  className="text-blue-400 hover:underline cursor-pointer font-semibold text-base sm:text-lg "
+                >
+                  {t("work.view")}
+                </Link>
+              </div>
+              <p className="text-lg sm:text-xl">{work.description}</p>
             </div>
-            <p className="text-lg sm:text-xl">{work.description}</p>
           </div>
-        </div>
+          <Comments comments={work.comments} workId={work.id} />
+        </>
       )}
     </div>
   );
