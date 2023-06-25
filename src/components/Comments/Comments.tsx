@@ -26,13 +26,15 @@ export function Comments({ comments, workId }: CommetsProps) {
     console.log(response);
     if (response.status === 200) {
       setCommentsList([
-        ...commentsList,
         {
           id: response.data.id,
-          name: response.data.name,
           comment: response.data.comment,
-          date: response.data.date,
+          createdAt: response.data.createdAt,
+          user: {
+            login: response.data.login,
+          },
         },
+        ...commentsList,
       ]);
       setComment("");
     }
