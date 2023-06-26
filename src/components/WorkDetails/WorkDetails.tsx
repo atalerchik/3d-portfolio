@@ -1,3 +1,7 @@
+import axios from "axios";
+import { useState } from "react";
+import { useAuthUser } from "react-auth-kit";
+
 interface Work {
   id: number;
   name: string;
@@ -11,14 +15,60 @@ interface Props {
 }
 
 export function WorkDetails({ work }: Props) {
+  const auth = useAuthUser();
+  const [isLiked, setIsLiked] = useState(await isLikedRequest());
+
+  async function isLikedRequest() {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const { data } = await axios.post(`${backendUrl}/3d-data/like`, {
+        workId: work.id,
+        email: auth()?.email
+      });
+      return data;
+  }
+  async function handleClick(event: any) {
+    event.preventDefault();
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    if (isLiked) {
+     await axios.delete(`${backendUrl}/3d-data/like`, {
+      workId: work.id,
+      email: auth()?.email
+     })
+    } else {
+     await axios.post(`${backendUrl}/3d-data/like`, {
+      workId: work.id,
+      email: auth()?.email
+    });
+    }
+  }
+  console.log(work);
   return (
     <div className="shadow-md rounded-md overflow-hidden bg-neutral-800">
       <img src={work.image} alt={work.name} className="w-full h-48 object-cover" />
-      <div className="px-4 py-3 ">
-        <h2 className="text-lg font-semibold text-gray-300">{work.name}</h2>
-        <p className="text-gray-400">Views: {work.views}</p>
-        <p className="text-gray-400">Date: {work.createdAt}</p>
+      <div className="px-4 py-3 flex justify-between justify-center">
+        <div>
+          <h2 className="text-lg font-semibold text-gray-300">{work.name}</h2>
+          <p className="text-gray-400">Views: {work.views}</p>
+          <p className="text-gray-400">Date: {work.createdAt}</p>
+        </div>
+        <div className="h-4 cursor-pointer" onClick={handleClick}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            width="50px"
+            height="50px"
+            className="text-blue-200"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );
+}
 }
