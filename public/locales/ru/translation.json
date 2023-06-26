@@ -29,7 +29,12 @@
     "searchPlaceholder": "Маленькая кухня"
   },
   "work": {
-    "view": "Просмотр"
+    "view": "Просмотр",
+    "comments": {
+      "title": "Комментарии",
+      "placeholder": "Введите ваш комментарий здесь",
+      "actionButton": "Отправить"
+    }
   },
   "auth": {
     "email": "Электронная почта",

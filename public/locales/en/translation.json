@@ -29,7 +29,12 @@
     "searchPlaceholder": "Small Kitchen"
   },
   "work": {
-    "view": "View"
+    "view": "View",
+    "comments": {
+      "title": "Comments",
+      "placeholder": "Enter your comment here",
+      "actionButton": "Send"
+    }
   },
   "auth": {
     "email": "Email address",
