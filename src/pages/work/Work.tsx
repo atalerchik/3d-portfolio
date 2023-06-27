@@ -23,13 +23,17 @@ export function Work() {
   const [t, i18n] = useTranslation();
   const [work, setWork] = useState(defaultWork);
   const [loading, setLoading] = useState(true);
+  const [likesCount, setLikesCount] = useState(0);
+
   const { id } = useParams();
+
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     fetch(`${backendUrl}/3d-data/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setWork(data);
+        setWork(data.work);
+        setLikesCount(data.userLikesCount || 0);
         setLoading(false);
       });
     fetch(`${backendUrl}/3d-data/${id}/views`, {
@@ -39,36 +43,6 @@ export function Work() {
       },
     });
   }, [id]);
-  const comments = [
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-  ];
 
   return (
     <div className="w-3/4 mx-auto">
@@ -97,7 +71,12 @@ export function Work() {
             />
             <div className="mt-4 flex flex-col space-y-4 w-full">
               <div className="flex flex-row gap-4 items-center justify-between w-full">
-                <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
+                <div className="flex space-x-2 items-center gap-2 justify-center">
+                  <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
+                  <p className="text-neutral-400">{work.views} views</p>
+                  <p className="text-neutral-400">{likesCount} likes</p>
+                </div>
+
                 <Link
                   to={`/viewer/${id}`}
                   className="text-blue-400 hover:underline cursor-pointer font-semibold text-base sm:text-lg "
