@@ -31,6 +31,8 @@
   "work": {
     "title": "Work",
     "view": "View",
+    "likes": "likes",
+    "views": "views",
     "comments": {
       "title": "Comments",
       "placeholder": "Enter your comment here",
