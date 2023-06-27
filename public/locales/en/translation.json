@@ -7,7 +7,7 @@
   },
   "home": {
     "greeting": "Hi, I'm Alexey.",
-    "description": "I am a 3D interior designer, at the moment I have more than 100 works",
+    "description": "I am a 3D interior designer, at the moment I have more than 30 works",
     "buttons": {
       "works": "VIEW MY WORKS",
       "about": "ABOUT ME"
@@ -15,12 +15,12 @@
   },
   "aboutMe": {
     "name": "Alexey Leonov | 3D Designer",
-    "description": "Hi there! My name is Alexey, and I am a 3D designer based in Grodno. I have 3 years of experience in the field and specialize in 3D modeling. I love working with clients to bring their ideas to life, and I am always looking for new projects to take on.",
+    "description": "Hi there! My name is Alexey, and I am a 3D designer based in Grodno. I have 2 years of experience in the field and specialize in 3D modeling. I love working with clients to bring their ideas to life, and I am always looking for new projects to take on.",
     "stats": {
       "locationHeading": "Location",
       "location": "Grodno, Belarus",
       "experienceHeading": "Experience",
-      "experience": "3 years"
+      "experience": "2 years"
     }
   },
   "works": {
