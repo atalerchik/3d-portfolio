@@ -8,9 +8,11 @@ interface Work {
   image: string;
   views: number;
   createdAt: string;
-  userLikes: [{
-    userId: string
-  }]
+  userLikes: [
+    {
+      userId: string;
+    },
+  ];
 }
 
 interface Props {
@@ -63,7 +65,7 @@ export function WorkDetails({ work }: Props) {
         <div>
           <h2 className="text-lg font-semibold text-gray-300">{work.name}</h2>
           <p className="text-gray-400">Views: {work.views}</p>
-          <p className="text-gray-400">Date: {work.createdAt}</p>
+          <p className="text-gray-400">Date: {work.createdAt.split("T")[0]}</p>
         </div>
         <div className="h-4 cursor-pointer" onClick={handleClick}>
           <svg

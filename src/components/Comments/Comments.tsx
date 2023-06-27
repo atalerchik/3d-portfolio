@@ -9,7 +9,7 @@ interface CommetsProps {
 }
 
 export function Comments({ comments, workId }: CommetsProps) {
-  const [t, i18n] = useTranslation();
+  const { t } = useTranslation();
   const [comment, setComment] = useState("");
   const [commentsList, setCommentsList] = useState(comments);
   const user = useAuthUser();
@@ -43,7 +43,7 @@ export function Comments({ comments, workId }: CommetsProps) {
   return (
     <div className="mb-12">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-2xl mb-4">Comments</h1>
+        <h1 className="text-2xl mb-4">{t("work.comments.title")}</h1>
       </div>
       <div className="flex flex-col items-center justify-center">
         {user() && (
@@ -58,7 +58,7 @@ export function Comments({ comments, workId }: CommetsProps) {
               cols={50}
               maxLength={500}
               minLength={10}
-              placeholder="Enter your comment"
+              placeholder={`${t("work.comments.placeholder")}`}
               className="mt-4 w-full max-w-xs p-2 rounded-lg border border-neutral-600 focus:border-blue-500 bg-neutral-800 max-h-[500px]"
               onChange={(e) => setComment(e.target.value)}
             />
@@ -66,7 +66,7 @@ export function Comments({ comments, workId }: CommetsProps) {
               type="submit"
               className="mt-4 w-full max-w-xs p-2 rounded-lg border border-neutral-600 focus:border-blue-500 bg-neutral-800"
             >
-              Submit
+              {t("work.comments.actionButton")}
             </button>
           </form>
         )}

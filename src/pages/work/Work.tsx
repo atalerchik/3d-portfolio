@@ -46,7 +46,7 @@ export function Work() {
 
   return (
     <div className="w-3/4 mx-auto">
-      <h1 className="text-4xl font-bold text-blue-400 my-8">Work</h1>
+      <h1 className="text-4xl font-bold text-blue-400 my-8">{t("work.title")}</h1>
       {loading ? (
         <div className="animate-pulse flex space-x-4">
           <div className="rounded-full bg-slate-700 h-10 w-10"></div>
