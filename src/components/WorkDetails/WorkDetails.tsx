@@ -17,7 +17,7 @@ export function WorkDetails({ work }: Props) {
       <div className="px-4 py-3 ">
         <h2 className="text-lg font-semibold text-gray-300">{work.name}</h2>
         <p className="text-gray-400">Views: {work.views}</p>
-        <p className="text-gray-400">Date: {work.createdAt}</p>
+        <p className="text-gray-400">Date: {work.createdAt.split("T")[0]}</p>
       </div>
     </div>
   );
