@@ -39,40 +39,10 @@ export function Work() {
       },
     });
   }, [id]);
-  const comments = [
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-    {
-      id: "1",
-      name: "John Doe",
-      comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum Labore. Quibusdam, quia.",
-      date: "2022-01-01",
-    },
-  ];
 
   return (
     <div className="w-3/4 mx-auto">
-      <h1 className="text-4xl font-bold text-blue-400 my-8">Work</h1>
+      <h1 className="text-4xl font-bold text-blue-400 my-8">{t("work.title")}</h1>
       {loading ? (
         <div className="animate-pulse flex space-x-4">
           <div className="rounded-full bg-slate-700 h-10 w-10"></div>

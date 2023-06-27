@@ -29,6 +29,7 @@
     "searchPlaceholder": "Маленькая кухня"
   },
   "work": {
+    "title": "Работа",
     "view": "Просмотр",
     "comments": {
       "title": "Комментарии",

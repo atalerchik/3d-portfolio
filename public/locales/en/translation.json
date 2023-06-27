@@ -29,6 +29,7 @@
     "searchPlaceholder": "Small Kitchen"
   },
   "work": {
+    "title": "Work",
     "view": "View",
     "comments": {
       "title": "Comments",
