@@ -8,6 +8,9 @@ interface Work {
   image: string;
   views: number;
   createdAt: string;
+  userLikes: [{
+    userId: string
+  }]
 }
 
 interface Props {
@@ -16,29 +19,40 @@ interface Props {
 
 export function WorkDetails({ work }: Props) {
   const auth = useAuthUser();
-  const [isLiked, setIsLiked] = useState(await isLikedRequest());
+  const [isLiked, setIsLiked] = useState(checkIfLiked());
 
-  async function isLikedRequest() {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-      const { data } = await axios.post(`${backendUrl}/3d-data/like`, {
-        workId: work.id,
-        email: auth()?.email
-      });
-      return data;
+  function checkIfLiked() {
+    if (work.userLikes.length < 1) {
+      return false;
+    }
+
+    for (let i = 0; i < work.userLikes.length; i++) {
+      if (work.userLikes[i].userId === auth()?.id) {
+        return true;
+      }
+    }
+
+    return false;
   }
+
   async function handleClick(event: any) {
     event.preventDefault();
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     if (isLiked) {
-     await axios.delete(`${backendUrl}/3d-data/like`, {
-      workId: work.id,
-      email: auth()?.email
-     })
+      const response = await axios.delete(`${backendUrl}/3d-data/like`, {
+        data: { workId: work.id, email: auth()?.email },
+      });
+      if (response.status === 200) {
+        setIsLiked(false);
+      }
     } else {
-     await axios.post(`${backendUrl}/3d-data/like`, {
-      workId: work.id,
-      email: auth()?.email
-    });
+      const response = await axios.post(`${backendUrl}/3d-data/like`, {
+        workId: work.id,
+        email: auth()?.email,
+      });
+      if (response.status === 200) {
+        setIsLiked(true);
+      }
     }
   }
   console.log(work);
@@ -58,7 +72,7 @@ export function WorkDetails({ work }: Props) {
             fill="currentColor"
             width="50px"
             height="50px"
-            className="text-blue-200"
+            className={`text-blue-200 ${isLiked ? "fill-red-500" : ""}`}
           >
             <path
               fillRule="evenodd"
@@ -70,5 +84,4 @@ export function WorkDetails({ work }: Props) {
       </div>
     </div>
   );
-}
 }

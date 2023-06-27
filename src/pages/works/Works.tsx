@@ -9,7 +9,7 @@ const Works: React.FC = () => {
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [t, i18n] = useTranslation();
+  const [t] = useTranslation();
   const isAuthenticated = useIsAuthenticated();
   const auth = useAuthUser();
 
