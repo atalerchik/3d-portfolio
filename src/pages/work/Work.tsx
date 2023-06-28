@@ -90,7 +90,7 @@ export function Work() {
                   {likesCount} {t("work.likes")}
                 </p>
               </div>
-              <pre className="text-lg sm:text-xl w-full whitespace-pre-wrap">
+              <pre className="text-lg sm:text-xl w-full whitespace-pre-wrap font-sans">
                 {work.description}
               </pre>
             </div>
