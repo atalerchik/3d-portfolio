@@ -73,12 +73,6 @@ export function Work() {
               <div className="flex flex-row gap-4 items-center justify-between w-full">
                 <div className="flex space-x-2 items-center gap-2 justify-center">
                   <h2 className="text-2xl sm:text-4xl font-bold">{work.name}</h2>
-                  <p className="text-neutral-400">
-                    {work.views} {t("work.views")}
-                  </p>
-                  <p className="text-neutral-400">
-                    {likesCount} {t("work.likes")}
-                  </p>
                 </div>
 
                 <Link
@@ -87,6 +81,14 @@ export function Work() {
                 >
                   {t("work.view")}
                 </Link>
+              </div>
+              <div className="flex flex-row gap-4 items-center w-full mb-8">
+                <p className="text-neutral-400">
+                  {work.views} {t("work.views")}
+                </p>
+                <p className="text-neutral-400">
+                  {likesCount} {t("work.likes")}
+                </p>
               </div>
               <p className="text-lg sm:text-xl">{work.description}</p>
             </div>
