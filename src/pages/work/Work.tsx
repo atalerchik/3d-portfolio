@@ -90,7 +90,9 @@ export function Work() {
                   {likesCount} {t("work.likes")}
                 </p>
               </div>
-              <p className="text-lg sm:text-xl">{work.description}</p>
+              <pre className="text-lg sm:text-xl w-full whitespace-pre-wrap">
+                {work.description}
+              </pre>
             </div>
           </div>
           <Comments comments={work.comments} workId={work.id} />
