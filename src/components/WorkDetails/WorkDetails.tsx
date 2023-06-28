@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useAuthUser } from "react-auth-kit";
+import { useIsAuthenticated } from "react-auth-kit";
 
 interface Work {
   id: number;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export function WorkDetails({ work }: Props) {
+  const isAuthenticated = useIsAuthenticated();
   const auth = useAuthUser();
   const [isLiked, setIsLiked] = useState(checkIfLiked());
 
@@ -68,20 +70,22 @@ export function WorkDetails({ work }: Props) {
           <p className="text-gray-400">Date: {work.createdAt.split("T")[0]}</p>
         </div>
         <div className="h-4 cursor-pointer" onClick={handleClick}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            width="50px"
-            height="50px"
-            className={`text-blue-200 ${isLiked ? "fill-red-500" : ""}`}
-          >
-            <path
-              fillRule="evenodd"
-              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-              clipRule="evenodd"
-            />
-          </svg>
+          {isAuthenticated() ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              width="50px"
+              height="50px"
+              className={`text-blue-200 ${isLiked ? "fill-red-500" : ""}`}
+            >
+              <path
+                fillRule="evenodd"
+                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ) : null}
         </div>
       </div>
     </div>
